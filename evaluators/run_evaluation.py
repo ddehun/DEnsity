@@ -54,7 +54,6 @@ def main(args):
     for name, dataset in datasets.items():
         repr_data = args.eval_dataset if "quality." in name else args.dataset
         repr_save_fname = args.repr_save_fname.format(repr_data, name, args.reranker_exp_name)
-        print(repr_save_fname)
         settype = name.split(".")[0]
         reprs = get_conv_repr(
             args,
@@ -85,7 +84,6 @@ def main(args):
     Evaluation
     """
     hyp_repr = torch.tensor(datasets["quality.test"].reprs)
-    print(hyp_repr.shape)
     human_repr = torch.tensor(datasets["original.train"].reprs[:, :1]) if not os.path.exists(mahalanobis_pck_name) else None
 
     evaluator = DEnsity(

@@ -12,14 +12,21 @@ transformers==4.12.3
 
 **2. Download pre-trained models**
 
-Model checkpoints (trained on DailyDialog): [Link](TBA)
-Statistic files of human responses (DailyDialog): [Link](TBA)
+
+Pretrained model files trained on 
+
+(trained on DailyDialog and ConvAI2): [Link](https://drive.google.com/drive/folders/1IUUg6xsmEr28oed2yPqIA2m6xsQ9yNRd?usp=share_link)
+
 
 Locate the downloaded files as below:
-```
+```bash
 DEnsity/
     logs/
         dd/
+            reranker.scl-temp0.1-coeff1.epoch10.lr5e-5/
+                models/
+                    bestmodel.pth
+        convai2/
             reranker.scl-temp0.1-coeff1.epoch10.lr5e-5/
                 models/
                     bestmodel.pth
@@ -27,11 +34,13 @@ DEnsity/
         pickle_save_path/
             dd/
                 maha.ref-train.reranker-reranker.scl-temp0.1-coeff1.epoch10.lr5e-5.positive.pck
+            convai2/
+                maha.ref-train.reranker-reranker.scl-temp0.1-coeff1.epoch10.lr5e-5.positive.pck
 ```
 
 
 ### 1. How to use DEnsity for Evaluation?
-```
+```python
 from evaluators.model import DEnsity
 from utils.utils import load_tokenizer_and_reranker
 
@@ -56,7 +65,7 @@ Below procedure is an example of training our feature extractor (i.e. response s
 
 Download [DailyDialog](https://aclanthology.org/I17-1099/) dataset and locate it as below.
 
-```
+```bash
 DEnsity/
     data/
         dd/
@@ -67,17 +76,18 @@ DEnsity/
 ```
 
 **2. Run Training**
-```
+```bash
 source scripts/train.sh
 ```
 
-**3. How to train on new datasets other than DailyDialog?**
-- Make a new dataset class (e.g., `MyDatasetforSelection(SelectionDataset)`).
+**3. How to train on new datasets other than DailyDialog and ConvAi2?**
+- Make a new dataset class (e.g., `MyDatasetforSelection(SelectionDataset)`). You can refer to `ConvAI2forSelection()` or `ConvAI2forSelection()` classes in `utils/dataset_util.py`.
+
 
 ### 3. How to Reproduce the Paper Result?
 
 **1. Preprocessing evaluation dataset**
-```
+```bash
 # DailyDialogue-Zhao
 # Download human annotation file from [here](https://drive.google.com/drive/folders/1Y0Gzvxas3lukmTBdAI6cVC4qJ5QM0LBt) to `data/evaluation/dd/dd_annotations.json`.
 python preprocess/preprocess_dd_zhao_annotation.py
@@ -91,23 +101,14 @@ python preprocess/preprocess_fed_dialogue.py
 ```
 
 **2. Run Evaluation**
-DailyDialog Main Results
-```
-eval_batch_size=128
-ref_type=train
-expname=reranker.scl-temp0.1-coeff1.epoch10.lr5e-5
-distance_method=maha
-
-train_dtaset=dd
-for eval_dataset in  dd  grade_eval_dd
-do
-    python evaluators/run_evaluation.py --reranker_exp_name $expname --distance_function $distance_method --ref_type $ref_type --eval_dataset $eval_dataset --dataset $train_dtaset  --eval_batch_size $eval_batch_size
-done
-
+Main Results (Table 1 in the paper)
+```bash
+source scripts/test.sh
 ```
 
 To reproduce the results of dialogue-level evaluation with FED datset, please use the python code.
-```
+
+```Python
 from tqdm import tqdm
 
 from evaluators.model import DEnsity
