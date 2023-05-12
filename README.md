@@ -1,6 +1,15 @@
+<!-- omit in toc -->
 ## DEnsity: Open-domain Dialogue Evaluation Metric using Density Estimation
 
 This repository contains the code and pre-trained models for [DEnsity: Open-domain Dialogue Evaluation Metric using Density Estimation (ACL2023 Findings)](https://arxiv.org/pdf/2305.04720.pdf).
+
+
+<!-- omit in toc -->
+## Links
+- [0. Preparation](#0-preparation)
+- [1. How to use DEnsity for Evaluation?](#1-how-to-use-density-for-evaluation)
+- [2. How to Train DEnsity from Scratch?](#2-how-to-train-density-from-scratch)
+- [3. How to Reproduce the Paper Result?](#3-how-to-reproduce-the-paper-result)
 
 ### 0. Preparation
 
@@ -13,9 +22,7 @@ transformers==4.12.3
 **2. Download pre-trained models**
 
 
-Pretrained model files trained on 
-
-(trained on DailyDialog and ConvAI2): [Link](https://drive.google.com/drive/folders/1IUUg6xsmEr28oed2yPqIA2m6xsQ9yNRd?usp=share_link)
+Pretrained models (trained on DailyDialog and ConvAI2): [Link](https://drive.google.com/drive/folders/1IUUg6xsmEr28oed2yPqIA2m6xsQ9yNRd?usp=share_link)
 
 
 Locate the downloaded files as below:
@@ -38,6 +45,7 @@ DEnsity/
                 maha.ref-train.reranker-reranker.scl-temp0.1-coeff1.epoch10.lr5e-5.positive.pck
 ```
 
+---
 
 ### 1. How to use DEnsity for Evaluation?
 ```python
@@ -57,6 +65,8 @@ conversation = ["How are you?", "I'm fine, thank you!", "That's great!!!!"]
 turn_level_score = evaluator.evaluate(conversation, is_turn_level=True)
 dialogue_level_score = evaluator.evaluate(conversation, is_turn_level=False)
 ```
+
+---
 
 ### 2. How to Train DEnsity from Scratch?
 Below procedure is an example of training our feature extractor (i.e. response selection model) on DailyDialog dataset.
@@ -80,8 +90,11 @@ DEnsity/
 source scripts/train.sh
 ```
 
+---
+
 **3. How to train on new datasets other than DailyDialog and ConvAi2?**
-- Make a new dataset class (e.g., `MyDatasetforSelection(SelectionDataset)`). You can refer to `ConvAI2forSelection()` or `ConvAI2forSelection()` classes in `utils/dataset_util.py`.
+
+Make a new dataset class (e.g., `MyDatasetforSelection(SelectionDataset)`). You can refer to `ConvAI2forSelection()` or `ConvAI2forSelection()` classes in `utils/dataset_util.py`.
 
 
 ### 3. How to Reproduce the Paper Result?
@@ -92,16 +105,20 @@ source scripts/train.sh
 # Download human annotation file from [here](https://drive.google.com/drive/folders/1Y0Gzvxas3lukmTBdAI6cVC4qJ5QM0LBt) to `data/evaluation/dd/dd_annotations.json`.
 python preprocess/preprocess_dd_zhao_annotation.py
 
-# GRADE-DailyDialogue
+# GRADE-DailyDialog and GRADE-ConvAI2
 # Download human annotation file fore [here](https://github.com/li3cmz/GRADE/tree/main/evaluation).
 python preprocess/preprocess_grade_annotation.py
+
+# USR-ConvAI2
+python preprocess/preprocess_usr_annotaton.py
 
 # Dialogue-level FED
 python preprocess/preprocess_fed_dialogue.py
 ```
 
 **2. Run Evaluation**
-Main Results (Table 1 in the paper)
+
+Main Results (Turn-level evalatuion in Table 1 of the paper)
 ```bash
 source scripts/test.sh
 ```
