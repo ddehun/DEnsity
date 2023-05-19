@@ -10,10 +10,19 @@ from torch.utils.data import DataLoader
 from scipy.stats import pearsonr, spearmanr
 import numpy as np
 
-
 from utils.dataset_util import selection_collate_fn
 
 
+@dataclass
+class EvaluationExample:
+    history: List[str]
+    answer: str
+    response: str
+    score: float
+    modelname: str = None
+    fact: List[str] = None
+
+        
 def save_prediction_output(output_fname: str, examples: List, predictions: List[float]):
     SAVEKEY = ["history", "answer", "response", "score", "modelname", "fact"]
     os.makedirs(os.path.dirname(output_fname), exist_ok=True)
