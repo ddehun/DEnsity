@@ -21,7 +21,8 @@ from transformers import AutoTokenizer, get_scheduler, logging
 from reranker.models import DefaultSelectionModel
 from reranker.trainer import Trainer
 from utils.config import DATASET_TO_KEYS
-from utils.dataset_util import TURN_TOKEN, load_dataset_for_reranker, selection_collate_fn
+from utils.dataset_util import (TURN_TOKEN, load_dataset_for_reranker,
+                                selection_collate_fn)
 from utils.utils import dump_config, set_seed, setup_path
 
 

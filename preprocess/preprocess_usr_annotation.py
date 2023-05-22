@@ -3,10 +3,10 @@ import sys
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import json
-import numpy as np
 import os
 from dataclasses import asdict
 
+import numpy as np
 import wget
 
 from evaluators.eval_utils import EvaluationExample
@@ -15,10 +15,8 @@ from evaluators.eval_utils import EvaluationExample
 def download_usr_dataset(output_path="."):
     dataset = {
         "test": "http://shikib.com/pc_usr_data.json",
-        "valid": "http://shikib.com/pc_usr_data.json",
     }
     wget.download(dataset["test"], output_path)
-    wget.download(dataset["valid"], output_path)
 
 
 def _write_items_to_jsonl(data, fname):
@@ -57,5 +55,4 @@ if __name__ == "__main__":
     output_path = "./data/evaluation/usr_convai2/"
     os.makedirs(output_path, exist_ok=True)
     download_usr_dataset(output_path)
-    preprocess_usr_dataset(output_path + "pc_usr_data.json", output_path + "valid_processed.json")
     preprocess_usr_dataset(output_path + "pc_usr_data.json", output_path + "test_processed.json")

@@ -1,17 +1,26 @@
 import json
 import os
 from dataclasses import asdict, dataclass
+from functools import partial
 from typing import List
 
-import torch
-from functools import partial
-from tqdm import tqdm
-from torch.utils.data import DataLoader
-from scipy.stats import pearsonr, spearmanr
 import numpy as np
-
+import torch
+from scipy.stats import pearsonr, spearmanr
+from torch.utils.data import DataLoader
+from tqdm import tqdm
 
 from utils.dataset_util import selection_collate_fn
+
+
+@dataclass
+class EvaluationExample:
+    history: List[str]
+    answer: str
+    response: str
+    score: float
+    modelname: str = None
+    fact: List[str] = None
 
 
 def save_prediction_output(output_fname: str, examples: List, predictions: List[float]):

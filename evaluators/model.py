@@ -10,8 +10,8 @@ import sys
 from typing import List
 
 import numpy as np
-from sklearn.covariance import EmpiricalCovariance
 import torch
+from sklearn.covariance import EmpiricalCovariance
 
 
 class DEnsity:

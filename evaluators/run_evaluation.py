@@ -7,7 +7,8 @@ import torch
 import transformers
 
 from evaluators.eval_args import get_args
-from evaluators.eval_utils import save_prediction_output, get_conv_repr, get_correlation
+from evaluators.eval_utils import (get_conv_repr, get_correlation,
+                                   save_prediction_output)
 from evaluators.model import DEnsity
 from utils.config import DATASET_TO_KEYS
 from utils.dataset_util import QualityDataset, load_dataset_for_reranker
@@ -21,7 +22,7 @@ def main(args):
 
     print(f" [*] Experiment name: {args.exp_setup}")
     print(f" [*] Evaluation Dataset: {args.eval_dataset}")
-    print(f" [*] Humen feature fname: {mahalanobis_pck_name}")
+    print(f" [*] Human feature fname: {mahalanobis_pck_name}")
 
     """
     Load datasets

@@ -17,6 +17,9 @@ This repository contains the code and pre-trained models for [DEnsity: Open-doma
 ```
 torch==1.7.1
 transformers==4.12.3
+scikit-learn
+scipy
+wget
 ```
 
 **2. Download pre-trained models**
@@ -62,8 +65,8 @@ evaluator = DEnsity(None,mean_cov_pck_fname,tokenizer,model)
 
 conversation = ["How are you?", "I'm fine, thank you!", "That's great!!!!"]
 
-turn_level_score = evaluator.evaluate(conversation, is_turn_level=True)
-dialogue_level_score = evaluator.evaluate(conversation, is_turn_level=False)
+turn_level_score = evaluator.evaluate(conversation, is_turn_level=True) # -498.25882 
+dialogue_level_score = evaluator.evaluate(conversation, is_turn_level=False) # -352.70813
 ```
 
 ---
