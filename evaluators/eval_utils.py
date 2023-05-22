@@ -22,7 +22,7 @@ class EvaluationExample:
     modelname: str = None
     fact: List[str] = None
 
-
+        
 def save_prediction_output(output_fname: str, examples: List, predictions: List[float]):
     SAVEKEY = ["history", "answer", "response", "score", "modelname", "fact"]
     os.makedirs(os.path.dirname(output_fname), exist_ok=True)
