@@ -183,7 +183,7 @@ def preprocess_convai2(dirname, output_fname, skip_ranker=False, skip_generator=
 
 
 if __name__ == "__main__":
-    original_grade_path = "./data/evaluation/grade_eval_data/dailydialog/"
+    original_grade_path = "./data/evaluation/grade_eval_dd/dailydialog/"
     os.makedirs("./data/evaluation/grade_eval_dd", exist_ok=True)
     preprocess_grade_dailydialogue(original_grade_path, "./data/evaluation/grade_eval_dd/test_processed.json")
 

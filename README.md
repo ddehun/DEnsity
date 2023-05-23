@@ -113,10 +113,10 @@ python preprocess/preprocess_dd_zhao_annotation.py
 python preprocess/preprocess_grade_annotation.py
 
 # USR-ConvAI2
-python preprocess/preprocess_usr_annotaton.py
+python preprocess/preprocess_usr_annotation.py
 
 # Dialogue-level FED
-python preprocess/preprocess_fed_dialogue.py
+preprocess/preprocess_fed_dialogue.ipynb # Run notebook
 ```
 
 **2. Run Evaluation**
